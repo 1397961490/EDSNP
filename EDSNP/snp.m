@@ -564,7 +564,7 @@ snprecision(num)=tp(num)/(tp(num)+fp(num));
 snpf(num)=2*snprecall(num)*snpacc(num)/(snprecall(num)+snpacc(num));
 snpmse(num)=sum((sum((g(:,:,16)-y).*(g(:,:,16)-y)))')/(row*col);
 snpsnr(num)=(sum((sum((g(:,:,16).*g(:,:,16))))')/(row*col*snpmse(num))).^0.5;
-snppsnr(num)=10*log(255*255/snpmse(num));
+snppsnr(num)=10*log10(255*255/snpmse(num));
 %end
 
 imshow(g(:,:,16),[]);
