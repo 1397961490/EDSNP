@@ -12,7 +12,7 @@ snppsnr=zeros(1,15);
 tp=zeros(1,15);tn=zeros(1,15);fp=zeros(1,15);fn=zeros(1,15);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 T=zeros(1,15);
-load('D:\zlp\data\groundTruth\train\135069.mat')
+load('C:\Users\86131\Desktop\测试\数据\BSDS500\135069.mat')
 y=groundTruth{1,1}.Boundaries;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %T=40;
@@ -21,12 +21,12 @@ num=1
 T(num)=40;
 %num=1;
 %T(num)=50;
-img=imread('135069.jpg');
+img=imread('C:\Users\86131\Desktop\测试\数据\BSDS500\135069.jpg');
 image=rgb2gray(img);
 [row,col,dim]=size(image);
 a=im2double(image(:,:));
 g(:,:,1)=2*255*a+1;
-g(:,:,15)=510;
+g(:,:,15)=2;
 g(:,:,16)=0;
 for j=2:12
 g(:,:,j)=0;
@@ -524,7 +524,7 @@ if g(r,c,14)==1
 g(r,c,14)=0; g(r,c,15)=g(r,c,15)+1;
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%g(i,j,t1) 
-if g(r,c,15)==511
+if g(r,c,15)==3
 g(r,c,1)=0;g(r,c,15)=0;g(r,c,16)=1;
 end
 if g(r,c,15)==1
@@ -566,5 +566,16 @@ snpmse(num)=sum((sum((g(:,:,16)-y).*(g(:,:,16)-y)))')/(row*col);
 snpsnr(num)=(sum((sum((g(:,:,16).*g(:,:,16))))')/(row*col*snpmse(num))).^0.5;
 snppsnr(num)=10*log10(255*255/snpmse(num));
 %end
-
+disp('输出值为：tp');
+disp(tp(num));
+disp('输出值为：tn');
+disp(tn(num));
+disp('输出值为：fp');
+disp(fp(num));
+disp('输出值为：fn');
+disp(fn(num));
+disp('输出值为：mse');
+disp(snpmse(num));
+disp('输出值为：spsnr');
+disp(snppsnr(num));
 imshow(g(:,:,16),[]);
